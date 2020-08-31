@@ -4,20 +4,29 @@ $(document).ready(function(){
 
     daysInList(dataToday);
     addHolidays(dataToday);
-
-    var attributo = $("h1").attr("data-this-date");
+//quando premo tasto prev o next rimuovo i li stampati
+// ed inserisco quelli nuovi.
+//Aggiunti anche alert se vado fuori 2018
     $("#next").click(function(){
-        $("li").remove();
-        dataToday.add(1, "months");
-        daysInList(dataToday);
-        addHolidays(dataToday);
-
+        if (dataToday.format("M")!= 12) {
+            $("li").remove();
+            dataToday.add(1, "months");
+            daysInList(dataToday);
+            addHolidays(dataToday);
+        }else {
+            alert("Non puoi andare più avanti!")
+        }
     });
     $("#prev").click(function(){
-        $("li").remove();
-        dataToday.subtract(1, "months");
-        daysInList(dataToday);
-        addHolidays(dataToday);
+        if (dataToday.format("M")!= 1) {
+            $("li").remove();
+            dataToday.subtract(1, "months");
+            daysInList(dataToday);
+            addHolidays(dataToday);
+        }else {
+            alert("Non puoi andare più indietro!")
+        }
+
 
     });
 });
@@ -67,7 +76,6 @@ function addHolidays(date){
             month: date.month()
         },
         success: function (risposta){
-            console.log(risposta.response);
             for (var i = 0; i < risposta.response.length; i++) {
                 var listItem = $('li[data-complete-date="' + risposta.response[i].date + '"]');
                 listItem.append("- " + risposta.response[i].name)
