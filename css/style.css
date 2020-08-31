@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    text-align: center;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    height: 20px;
+    width: 20px;
+}
+
+.holiday {
+    color: red;
+}
